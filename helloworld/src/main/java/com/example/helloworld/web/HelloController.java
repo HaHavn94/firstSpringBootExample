@@ -1,28 +1,18 @@
 package com.example.helloworld.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@ResponseBody
-
 public class HelloController {
-	@RequestMapping("index")
-	public String index() {
-		return "This is the main page";		
+	@RequestMapping("/hello")
+	public String greeting(@RequestParam(value = "name") String name,
+			@RequestParam(value="age") int age, 
+			Model model) {
+		    model.addAttribute("name", name);
+		    model.addAttribute("age", age);
+		return "hello";
 	}
-	
-	@RequestMapping("contact")
-	public String contact() {
-		return "This is the contact page";		
-	}
-	
-	@RequestMapping("hello")
-	public String hello(@RequestParam(name ="location") String location, @RequestParam String name){
-		return "Welcome to the " + location + " " + name + "!"; 
-		
-	}
-	
 }
